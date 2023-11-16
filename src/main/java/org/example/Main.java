@@ -44,6 +44,7 @@ public class Main {
                     System.out.println("Enter new priority: (LOW, MEDIUM or HIGH) ");
                     String enterPriority = scanner.next().toUpperCase();
                     Priority priority = controller.checkPriority(enterPriority);
+                    scanner.nextLine();
 
                     System.out.println("Add a description of the complain: ");
                     String description = scanner.nextLine();
