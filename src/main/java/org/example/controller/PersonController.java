@@ -9,8 +9,8 @@ public class PersonController {
 
     private List<Person> queue = new ArrayList<>();
 
-    public Person createPerson(String name, Integer age, Priority priority) {
-        Person newPerson = new Person(name, age, priority);
+    public Person createPerson(String name, Integer age, Priority priority, String description) {
+        Person newPerson = new Person(name, age, priority, description);
         sortQueue(newPerson);
         return newPerson;
     }
@@ -29,8 +29,10 @@ public class PersonController {
 
     public void updatePersonName(int id, String newName) {
         Person person = readPersonById(id);
-        if (person != null)
+        if (person != null) {
             person.setName(newName);
+            System.out.println("Name updated.");
+        }
         else
             System.out.println("Fail to update name!");
     }
@@ -50,8 +52,9 @@ public class PersonController {
 
                 int idToRecover = person.getId();
                 String name = person.getName();
+                String description = person.getDescription();
                 deletePerson(id);
-                Person personId = createPerson(name, newAge, priority);
+                Person personId = createPerson(name, newAge, priority, description);
                 personId.setId(idToRecover);
             }
         } else
@@ -62,18 +65,32 @@ public class PersonController {
         Person person = readPersonById(id);
         if (person != null) {
             boolean validator = validateNewPriority(person.getPriority(), newPriority);
-            if (!validator)
+            if (!validator) {
                 person.setPriority(newPriority);
+                System.out.println("Priority updated.");
+            }
             else {
                 int idToRecover = person.getId();
                 String name = person.getName();
                 Integer age = person.getAge();
+                String description = person.getDescription();
                 deletePerson(id);
-                Person personId = createPerson(name, age, newPriority);
+                Person personId = createPerson(name, age, newPriority, description);
                 personId.setId(idToRecover);
+                System.out.println("Priority updated.");
             }
         } else
             System.out.println("Fail to update priority!");
+    }
+
+    public void updatePersonDescription(int id, String newDescription) {
+        Person person = readPersonById(id);
+        if (person != null) {
+            person.setDescription(newDescription);
+            System.out.println("Description updated.");
+        }
+        else
+            System.out.println("Fail to update description!");
     }
 
     public void deletePerson(int id) {

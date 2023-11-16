@@ -16,15 +16,15 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         // INFORMAÇÕES FICTÍCIAS PARA O SISTEMA DE INSERÇÃO SE BASEAR
-        controller.createPerson("TESTE_JOVEM_BAIXA", 30, Priority.LOW);
-        controller.createPerson("TESTE_IDOSO_BAIXA", 60, Priority.LOW);
-        controller.createPerson("TESTE_JOVEM_MEDIA", 30, Priority.MEDIUM);
-        controller.createPerson("TESTE_IDOSO_MEDIA", 60, Priority.MEDIUM);
-        controller.createPerson("TESTE_IDOSO_ALTA", 60, Priority.HIGH);
-        controller.createPerson("TESTE_JOVEM_ALTA", 30, Priority.HIGH);
+        controller.createPerson("TESTE_JOVEM_BAIXA", 30, Priority.LOW, "");
+        controller.createPerson("TESTE_IDOSO_BAIXA", 60, Priority.LOW, "");
+        controller.createPerson("TESTE_JOVEM_MEDIA", 30, Priority.MEDIUM, "");
+        controller.createPerson("TESTE_IDOSO_MEDIA", 60, Priority.MEDIUM, "");
+        controller.createPerson("TESTE_IDOSO_ALTA", 60, Priority.HIGH, "");
+        controller.createPerson("TESTE_JOVEM_ALTA", 30, Priority.HIGH, "");
 
         // PESSOA DE TESTE
-        controller.createPerson("SEU JAO", 10, Priority.MEDIUM);
+        controller.createPerson("SEU JAO", 10, Priority.MEDIUM, "Dor de cabeça");
 
         while (true) {
             view.displayMenu();
@@ -45,7 +45,11 @@ public class Main {
                     String enterPriority = scanner.next().toUpperCase();
                     Priority priority = controller.checkPriority(enterPriority);
 
-                    controller.createPerson(name, age, priority);
+                    System.out.println("Add a description of the complain: ");
+                    String description = scanner.nextLine();
+
+                    controller.createPerson(name, age, priority, description);
+                    System.out.println("Person created.");
                 }
                 case 2 -> {
                     boolean validation = true;
@@ -96,6 +100,16 @@ public class Main {
                                 controller.updatePersonPriority(id, newPriority);
                             }
                             case 4 -> {
+                                System.out.println("Enter person id to update: ");
+                                int id = scanner.nextInt();
+                                scanner.nextLine();
+
+                                System.out.println("Type the new description: (The current description will be overwritten)");
+                                String newDescription = scanner.nextLine();
+
+                                controller.updatePersonDescription(id, newDescription);
+                            }
+                            case 5 -> {
                                 System.out.println("Returning to Main Menu...");
                                 validation = false;
                             }

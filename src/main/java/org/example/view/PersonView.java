@@ -2,6 +2,7 @@ package org.example.view;
 
 import org.example.model.Person;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class PersonView {
@@ -18,10 +19,12 @@ public class PersonView {
 
     public void displayPerson(Person person) {
         if (person != null) {
+            System.out.println("Id: " + person.getId());
             System.out.println("\nName: " + person.getName());
             System.out.println("Age: " + person.getAge());
             System.out.println("Priority: " + person.getPriority());
-            System.out.println("Id: " + person.getId());
+            System.out.println("Arrival: " + person.getArrival().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+            System.out.println("Description: " + person.getDescription());
         } else {
             System.out.println("Person not found.");
         }
@@ -46,6 +49,7 @@ public class PersonView {
         System.out.println("1. Update Name");
         System.out.println("2. Update Age");
         System.out.println("3. Update Priority");
-        System.out.println("4. Return to main menu");
+        System.out.println("4. Update Description");
+        System.out.println("5. Return to main menu");
     }
 }

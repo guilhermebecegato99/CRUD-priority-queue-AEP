@@ -1,19 +1,37 @@
 package org.example.model;
 
+import java.time.LocalDateTime;
+
 public class Person {
 
     private int id;
     private String name;
     private Integer age;
     private Priority priority;
+    private String description;
+    private LocalDateTime arrival;
 
     private static int nextId = -5;
 
-    public Person(String name, Integer age, Priority priority) {
+    public Person(String name, Integer age, Priority priority, String description) {
         this.name = name;
         this.age = age;
         this.priority = priority;
+        this.description = description;
         this.id = nextId++;
+        this.arrival = LocalDateTime.now();
+    }
+
+    public LocalDateTime getArrival() {
+        return arrival;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getName() {
